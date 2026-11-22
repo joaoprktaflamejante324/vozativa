@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acessibilidade e Direitos Digitais</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #222222;
+      line-height: 1.5;
+    }
+
+    header, main, footer {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.6em;
+    }
+
+    .barra-botoes {
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      border: 1px solid #444444;
+      background-color: #e9ecef;
+      color: #111111;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+
+    button:hover {
+      background-color: #d3d9df;
+    }
+
+    .alto-contraste {
+      background-color: #000000 !important;
+      color: #ffff00 !important;
+    }
+
+    .alto-contraste header,
+    .alto-contraste main,
+    .alto-contraste footer {
+      background-color: #111111 !important;
+      color: #ffff00 !important;
+      border-color: #ffff00 !important;
+    }
+
+    .alto-contraste button,
+    .alto-contraste input,
+    .alto-contraste textarea {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border-color: #ffff00 !important;
+    }
+
+    .dica-item {
+      background: #f9f9f9;
+      border-left: 4px solid #333333;
+      padding: 10px 12px;
+      margin-top: 10px;
+    }
+
+    .alto-contraste .dica-item {
+      background: #1a1a1a !important;
+      border-left-color: #ffff00 !important;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Projeto de Acessibilidade Web e Direitos Digitais</h1>
+    <p>Site simples feito para praticar acessibilidade, tamanho de fonte, leitura em voz alta e interação com o DOM.</p>
+
+    <div class="barra-botoes">
+      <button id="btn-contraste" type="button">Alto Contraste</button>
+      <button id="btn-aumentar" type="button">A+</button>
+      <button id="btn-diminuir" type="button">A-</button>
+      <button id="btn-resetar" type="button">Fonte Normal</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="texto-principal">
+      <h2>Direitos Digitais e Inclusão</h2>
+      <p>
+        O acesso à internet e às ferramentas digitais faz parte da cidadania hoje em dia.
+        Ter sites acessíveis ajuda pessoas com deficiência visual, baixa visão ou dificuldade
+        de leitura a usarem a internet sem barreiras.
+      </p>
+      <p>
+        Entre os direitos digitais importantes estão a privacidade dos dados pessoais,
+        a segurança online, o acesso à informação e a inclusão de todos na tecnologia.
+      </p>
+
+      <div class="barra-botoes">
+        <button id="btn-ler" type="button">Ler em voz alta</button>
+        <button id="btn-parar" type="button">Parar leitura</button>
+      </div>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Mural de Dicas de Inclusão</h2>
+      <form id="form-dica">
+        <label for="nome-dica">Seu nome:</label>
+        <input type="text" id="nome-dica" placeholder="Ex: Lucas" required>
+
+        <label for="texto-dica">Dica sobre acessibilidade ou direitos digitais:</label>
+        <textarea id="texto-dica" rows="3" placeholder="Ex: Colocar descrição nas imagens ajuda leitores de tela." required></textarea>
+
+        <button type="submit">Adicionar dica</button>
+      </form>
+
+      <div id="lista-dicas">
+        <div class="dica-item">
+          <strong>Ana:</strong> Usar fontes legíveis e bom contraste facilita a leitura para todo mundo.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Trabalho escolar - HTML, CSS e JavaScript básico.</p>
+  </footer>
+
+  <script>
+    let tamanhoFonte = 16;
+
+    const btnContraste = document.getElementById("btn-contraste");
+    const btnAumentar = document.getElementById("btn-aumentar");
+    const btnDiminuir = document.getElementById("btn-diminuir");
+    const btnResetar = document.getElementById("btn-resetar");
+    const btnLer = document.getElementById("btn-ler");
+    const btnParar = document.getElementById("btn-parar");
+    const formDica = document.getElementById("form-dica");
+    const listaDicas = document.getElementById("lista-dicas");
+
+    btnContraste.addEventListener("click", function () {
+      document.body.classList.toggle("alto-contraste");
+    });
+
+    btnAumentar.addEventListener("click", function () {
+      if (tamanhoFonte < 26) {
+        tamanhoFonte += 2;
+        document.body.style.fontSize = tamanhoFonte + "px";
+      }
+    });
+
+    btnDiminuir.addEventListener("click", function () {
+      if (tamanhoFonte > 12) {
+        tamanhoFonte -= 2;
+        document.body.style.fontSize = tamanhoFonte + "px";
+      }
+    });
+
+    btnResetar.addEventListener("click", function () {
+      tamanhoFonte = 16;
+      document.body.style.fontSize = "16px";
+    });
+
+    btnLer.addEventListener("click", function () {
+      window.speechSynthesis.cancel();
+      const texto = document.getElementById("texto-principal").innerText;
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = "pt-BR";
+      window.speechSynthesis.speak(fala);
+    });
+
+    btnParar.addEventListener("click", function () {
+      window.speechSynthesis.cancel();
+    });
+
+    formDica.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const nome = document.getElementById("nome-dica").value.trim();
+      const dica = document.getElementById("texto-dica").value.trim();
+
+      if (nome === "" || dica === "") return;
+
+      const novaDica = document.createElement("div");
+      novaDica.className = "dica-item";
+      novaDica.innerHTML = "<strong>" + nome + ":</strong> " + dica;
+
+      listaDicas.appendChild(novaDica);
+      formDica.reset();
+    });
+  </script>
+
+</body>
+</html>
